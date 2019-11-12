@@ -6,6 +6,39 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(tidyr)
+library(here)
+```
+
+```{r}
+lobster_abundance <- read.csv("lobster_abundance_sbc_lter.csv",
+                              na = -99999) %>% 
+  clean_names()
+```
+
+### 1. Introduction
+
+
+### 2. Data and Methods
+
+
+### 3. Results
+
+#### a. Results A
+
+```{r}
+lobster_year <- lobster_abundance %>% 
+  group_by(year, site) %>% 
+  summarize(total_counts = sum(count))
+
+ggplot(lobster_year, aes(x = year, y = total_counts)) +
+  geom_col(aes(fill = site)) +
+  facet_wrap(~site)
 ```
 
