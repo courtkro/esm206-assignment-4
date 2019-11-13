@@ -31,14 +31,33 @@ lobster_abundance <- read.csv("lobster_abundance_sbc_lter.csv",
 ### 3. Results
 
 #### a. Results A
+IVEE and NAPL - MPA
+AQUE, CARP and MOHK - Non-MPA
+- Need to change color and show between MPA and NonMPA sites
 
 ```{r}
-lobster_year <- lobster_abundance %>% 
+lobster_count <- lobster_abundance %>% 
   group_by(year, site) %>% 
   summarize(total_counts = sum(count))
 
-ggplot(lobster_year, aes(x = year, y = total_counts)) +
-  geom_col(aes(fill = site)) +
-  facet_wrap(~site)
+ggplot(lobster_count, aes(x = year, y = total_counts)) +
+  geom_col(aes(fill = site),show.legend = FALSE) +
+  facet_wrap(~site)+
+  labs(x = "Year (2012-2018)",
+       y = "Total lobster counts",
+       title = "Total lobster counts per site each year (2012-2018)",
+       subtitle = "Source: SBC LTER",
+       caption = "Lobster abundance increased between 2012 and 2018  for most of the sites excluding AQUE site./nThe MPA sites (IVEE and NAPL) lobster abundance grew substantially over the recorded years compared to non-MPA sites")
+```
+
+#### b. Results B
+
+```{r}
+lobster_size <- lobster_abundance %>% 
+  filter(year %in% c("2012", "2018")) %>% 
+  group_by(year, site) %>% 
+  summarize(mean_size = mean(size_mm, na.rm = TRUE))
+
+
 ```
 
