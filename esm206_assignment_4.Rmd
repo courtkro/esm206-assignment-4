@@ -51,6 +51,7 @@ ggplot(lobster_count, aes(x = year, y = total_counts)) +
 ```
 
 #### b. Results B
+- I think i did this wrong
 
 ```{r}
 lobster_size <- lobster_abundance %>% 
